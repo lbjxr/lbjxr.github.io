@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="1.简介2.安装环境3.安装步骤4.测试5.总结">
+<meta name="description" content="1.简介vsftpd 是“very secure FTP daemon”的缩写，安全性是它的一个最大的特点。vsftpd 是一个 UNIX 类操作系统上运行的服务器的名字，它可以运行在诸如 Linux、BSD、Solaris、 HP-UNIX等系统上面，是一个完全免费的、开发源代码的ftp服务器软件，支持很多其他的FTP 服务器所不支持的特征。—来自互动百科 2.背景之所以想起来安装FTP服务器，">
 <meta name="keywords" content="技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="远程服务器搭建vsftpd">
 <meta property="og:url" content="http://yoursite.com/2017/08/07/20170807/index.html">
 <meta property="og:site_name" content="LBJ_Blog">
-<meta property="og:description" content="1.简介2.安装环境3.安装步骤4.测试5.总结">
+<meta property="og:description" content="1.简介vsftpd 是“very secure FTP daemon”的缩写，安全性是它的一个最大的特点。vsftpd 是一个 UNIX 类操作系统上运行的服务器的名字，它可以运行在诸如 Linux、BSD、Solaris、 HP-UNIX等系统上面，是一个完全免费的、开发源代码的ftp服务器软件，支持很多其他的FTP 服务器所不支持的特征。—来自互动百科 2.背景之所以想起来安装FTP服务器，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-07T12:16:16.044Z">
+<meta property="og:updated_time" content="2017-08-07T12:58:29.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="远程服务器搭建vsftpd">
-<meta name="twitter:description" content="1.简介2.安装环境3.安装步骤4.测试5.总结">
+<meta name="twitter:description" content="1.简介vsftpd 是“very secure FTP daemon”的缩写，安全性是它的一个最大的特点。vsftpd 是一个 UNIX 类操作系统上运行的服务器的名字，它可以运行在诸如 Linux、BSD、Solaris、 HP-UNIX等系统上面，是一个完全免费的、开发源代码的ftp服务器软件，支持很多其他的FTP 服务器所不支持的特征。—来自互动百科 2.背景之所以想起来安装FTP服务器，">
 
 
 
@@ -346,7 +346,25 @@
       
 
       
-        <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><h2 id="2-安装环境"><a href="#2-安装环境" class="headerlink" title="2.安装环境"></a>2.安装环境</h2><h2 id="3-安装步骤"><a href="#3-安装步骤" class="headerlink" title="3.安装步骤"></a>3.安装步骤</h2><h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h2>
+        <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>vsftpd 是“very secure FTP daemon”的缩写，安全性是它的一个最大的特点。vsftpd 是一个 UNIX 类操作系统上运行的服务器的名字，它可以运行在诸如 Linux、BSD、Solaris、 HP-UNIX等系统上面，是一个完全免费的、开发源代码的ftp服务器软件，支持很多其他的FTP 服务器所不支持的特征。<br>—来自互动百科</p>
+<h2 id="2-背景"><a href="#2-背景" class="headerlink" title="2.背景"></a>2.背景</h2><p>之所以想起来安装FTP服务器，是因为我的服务器主要是用作梯子。然后前一段时间利用她搭建了自己的博客，也就是你现在浏览的这个。但是每次想写博客时候。总要登录到远程服务器然后操作。对了，我的博客是用hexo搭建的。然后操作起来不是很方便，所以想着，在本地写好后直接放到服务器上去。于是就开始搭建。</p>
+<h2 id="3-安装步骤"><a href="#3-安装步骤" class="headerlink" title="3.安装步骤"></a>3.安装步骤</h2><p>3.1. 系统环境</p>
+<pre><code>     _,met$$$$$gg.           root@xxx
+  ,g$$$$$$$$$$$$$$$P.        OS: Debian 8.7 jessie
+,g$$P&quot;&quot;       &quot;&quot;&quot;Y$$.&quot;.      Kernel: x86_64 Linux 4.11.7-041107-generic
+</code></pre><p>   ,$$P’              <code>$$$.      Uptime: 42d 1h 46m
+  &#39;,$$P       ,ggs.</code>$$b:    Packages: 457<br>  <code>d$$&#39;     ,$P&quot;&#39;   .    $$$     Shell: bash 4.3.30
+   $$P      d$&#39;     ,    $$P     CPU: Virtual CPU a7769a6388d5 @ 2.394GHz
+   $$:      $$.   -    ,d$$&#39;     RAM: 134MB / 989MB
+   $$\;      Y$b._   _,d$P&#39;     
+   Y$$.</code>.<code>&quot;Y$$$$P&quot;&#39;</code>$$b      “-._<em><br>    <code>Y$$</code>Y$$.<br>       <code>$$b.</code>Y$$b.<br>            `”Y$b.</em><br>                `”””” </p>
+<p>3.2. 安装步骤<br>这里的安装步骤是参考简书上《Ubuntu 14.04 FTP服务器–vsftpd的安装和配置》（<a href="http://www.jianshu.com/p/2a8107b5c740）" target="_blank" rel="external">http://www.jianshu.com/p/2a8107b5c740）</a>.<br>3.2.1. 更新<br>    sudo apt-get update<br>3.2.2. 安装vsftpd<br>    sudo apt-get install vsftpd<br>3.2.3. 判断vsftpd是否安装成功<br>    service vsftpd status<br>如果出现：<br>    ● vsftpd.service - vsftpd FTP server<br>   Loaded: loaded (/lib/systemd/system/vsftpd.service; enabled)<br>   Active: active (running) since Mon 2017-08-07 11:54:56 UTC; 43min ago<br>  Process: 27797 ExecStartPre=/bin/mkdir -p /var/run/vsftpd/empty (code=exited, status=0/SUCCESS)<br> Main PID: 27800 (vsftpd)<br>   CGroup: /system.slice/vsftpd.service<br>           └─27800 /usr/sbin/vsftpd /etc/vsftpd.conf</p>
+<p>Aug 07 11:54:56 lbj systemd[1]: Started vsftpd FTP server.</p>
+<p>表示安装成功。<br>3.2.4. 服务器端基本命令<br>    service vsftpd stop //关闭vsftpd服务<br>    service vsftpd start //启动vsftpd服务<br>    service vsftpd restart //重启vsftpd服务器<br>3.2.5. 新建”/home/share”目录作为用户主目录<br>    sudo mkdir /home/share<br>3.2.6. 新建share用户作为FTP登录用户并设置密码<br>    sudo useradd -d /home/share -s /bin/bash share<br>    sudo passwd share<br>3.2.7. 使用vim修改配置文件/etc/vsftpd.conf<br>vsftpd默认配置是不支持上传文件的。我们需要手动打开,找到”write_enable”。把前面的”#“注释去掉保存就行了。至此简单的FTP服务器就搭建好了。    </p>
+<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><p>4.1. 本地登录<br>    ftp 你的服务器ip<br>如果顺利会看到<br>    Connected to 你的服务器ip.<br>    220 (vsFTPd 3.0.2)<br>    Name (你的服务器ip:x): share<br>    331 Please specify the password.<br>    Password:<br>    230 Login successful.<br>    Remote system type is UNIX.<br>    Using binary mode to transfer files.<br>其中会提示输入用户名和密码。</p>
+<p>下面就可以使用FTP命令进行操作了。<br>4.2. 简单的FTP命令：<br>    get remote-file[local-file]： 将远程主机的文件remote-file传至 本地硬盘的local-file。<br>    mget remote-files：传输多个远程文件。<br>    put local-file[remote-file]：将本地文件local-file传送至远程主机<br>我用的命令不多，就简单列举几条。详细命令看<a href="http://www.jb51.net/os/RedHat/1133.html" target="_blank" rel="external">http://www.jb51.net/os/RedHat/1133.html</a></p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h2><p>第一次写这种技术性博客。可能逻辑上不是很缜密。希望大家提出意见了建议。同时通过这篇博客，我也加深对Linux命令和FTP命令的认识。后期有时间会更新。<br>ps：这篇博客就是通过FTP上传到我的服务器上的。</p>
+
       
     </div>
     
@@ -516,7 +534,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装环境"><span class="nav-number">2.</span> <span class="nav-text">2.安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装步骤"><span class="nav-number">3.</span> <span class="nav-text">3.安装步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-测试"><span class="nav-number">4.</span> <span class="nav-text">4.测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-总结"><span class="nav-number">5.</span> <span class="nav-text">5.总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-背景"><span class="nav-number">2.</span> <span class="nav-text">2.背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装步骤"><span class="nav-number">3.</span> <span class="nav-text">3.安装步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-测试"><span class="nav-number">4.</span> <span class="nav-text">4.测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-总结"><span class="nav-number">5.</span> <span class="nav-text">5.总结</span></a></li></ol></div>
             
 
           </div>
