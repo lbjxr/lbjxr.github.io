@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lbjxr.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="OpenWrt 作为一款强大的开源路由器操作系统，为用户带来了高度定制化的网络体验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenWrt部署与基础配置">
+<meta property="og:url" content="https://lbjxr.github.io/2024/07/27/OpenWrt%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="LBJ_Blog">
+<meta property="og:description" content="OpenWrt 作为一款强大的开源路由器操作系统，为用户带来了高度定制化的网络体验">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-27T01:51:00.000Z">
+<meta property="article:modified_time" content="2024-07-27T01:51:00.000Z">
+<meta property="article:author" content="LiuBenJian">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lbjxr.github.io/2024/07/27/OpenWrt%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>OpenWrt部署与基础配置 | LBJ_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LBJ_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个计算机小白，努力让自己变得多彩</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="Home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="LBJ fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="Tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="Cates fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="Archives fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2024/07/27/OpenWrt%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/toux.webp">
+      <meta itemprop="name" content="LiuBenJian">
+      <meta itemprop="description" content="似懂非懂的小白">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LBJ_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenWrt部署与基础配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-27 09:51:00" itemprop="dateCreated datePublished" datetime="2024-07-27T09:51:00+08:00">2024-07-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">服务器操作</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">OpenWrt 作为一款强大的开源路由器操作系统，为用户带来了高度定制化的网络体验</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>OpenWrt 作为一款强大的开源路由器操作系统，为用户带来了高度定制化的网络体验</p>
+<span id="more"></span>
+
+<h1 id="OpenWrt-部署与基础配置全攻略"><a href="#OpenWrt-部署与基础配置全攻略" class="headerlink" title="OpenWrt 部署与基础配置全攻略"></a>OpenWrt 部署与基础配置全攻略</h1><p>OpenWrt 作为一款强大的开源路由器操作系统，为用户带来了高度定制化的网络体验。无论是提升网络性能、拓展功能，还是满足个性化需求，OpenWrt 都展现出独特魅力。但对于初次接触的用户，其部署和基础配置可能颇具挑战。下面，我们就一步步深入了解 OpenWrt 的部署与基础配置。</p>
+<h2 id="一、部署前的精心筹备"><a href="#一、部署前的精心筹备" class="headerlink" title="一、部署前的精心筹备"></a>一、部署前的精心筹备</h2><h3 id="（一）设备适配性确认"><a href="#（一）设备适配性确认" class="headerlink" title="（一）设备适配性确认"></a>（一）设备适配性确认</h3><p>并非所有设备都能完美适配 OpenWrt，在着手部署前，务必确认设备兼容性。可前往 OpenWrt 官方网站的设备支持列表（<a target="_blank" rel="noopener" href="https://openwrt.org/toh/start">https://openwrt.org/to</a><a target="_blank" rel="noopener" href="https://openwrt.org/toh/start">h&#x2F;sta</a><a target="_blank" rel="noopener" href="https://openwrt.org/toh/start">rt</a>），仔细核对自己设备的型号及硬件版本。以常见的路由器为例，像小米路由器、斐讯路由器等部分型号虽能安装 OpenWrt，但不同硬件版本在刷机过程及后续使用中，可能存在细微差别。若设备不在支持列表内，强行刷机可能导致设备变砖，无法正常使用。</p>
+<h3 id="（二）备份重要数据"><a href="#（二）备份重要数据" class="headerlink" title="（二）备份重要数据"></a>（二）备份重要数据</h3><p>刷机过程存在风险，可能因各种意外导致设备原有数据丢失。因此，在部署 OpenWrt 前，一定要备份设备中的重要数据，如路由器中的网络配置信息、已保存的 WiFi 密码、防火墙规则等。对于一些存储有个人数据的设备，如挂载了硬盘的智能设备，更要提前将数据拷贝至外部存储介质。备份数据就如同为设备上了一份保险，即便刷机出现问题，也能最大程度减少损失。</p>
+<h3 id="（三）准备刷机工具及文件"><a href="#（三）准备刷机工具及文件" class="headerlink" title="（三）准备刷机工具及文件"></a>（三）准备刷机工具及文件</h3><p><strong>下载 OpenWrt 固件</strong>：根据设备型号及硬件版本，从 OpenWrt 官方下载站点（<a target="_blank" rel="noopener" href="https://openwrt.org/downloads">https://openwrt.org/do</a><a target="_blank" rel="noopener" href="https://openwrt.org/downloads">wnloa</a><a target="_blank" rel="noopener" href="https://openwrt.org/downloads">ds</a>）获取对应的固件文件。确保下载的固件版本与设备完全匹配，否则可能导致刷机失败。例如，若设备是基于 ARM 架构，却下载了 x86 架构的固件，刷机必然无法成功。</p>
+<p><strong>刷机工具</strong>：不同设备刷机所需工具不同。常见的有 TFTP 刷机工具，适用于部分路由器在特定模式下刷机；还有一些设备需借助官方提供的刷机软件，如某些品牌路由器有专门的刷机助手。在准备刷机工具时，要确认工具版本与设备及操作系统的兼容性，避免因工具问题导致刷机受阻。</p>
+<h2 id="二、OpenWrt-的部署流程"><a href="#二、OpenWrt-的部署流程" class="headerlink" title="二、OpenWrt 的部署流程"></a>二、OpenWrt 的部署流程</h2><h3 id="（一）进入设备刷机模式"><a href="#（一）进入设备刷机模式" class="headerlink" title="（一）进入设备刷机模式"></a>（一）进入设备刷机模式</h3><p><strong>常规路由器刷机模式进入方法</strong>：对于多数路由器，在关机状态下，按住复位键（通常标有 Reset 字样），然后接通电源，持续按住复位键数秒，直至路由器指示灯状态发生变化（如快速闪烁），此时路由器进入刷机模式。不同品牌和型号的路由器，进入刷机模式的具体操作可能略有差异，务必参考设备说明书或官方刷机教程。</p>
+<p><strong>特殊设备刷机模式</strong>：一些智能设备，如玩客云等，进入刷机模式的方法较为特殊。可能需要短接设备主板上的特定引脚，再通过 USB 或网络连接进行刷机操作。这类设备刷机前，要仔细阅读相关刷机教程，明确每一步操作细节，操作过程中务必小心谨慎，避免损坏设备硬件。</p>
+<h3 id="（二）刷机操作"><a href="#（二）刷机操作" class="headerlink" title="（二）刷机操作"></a>（二）刷机操作</h3><p><strong>TFTP 刷机</strong>：若采用 TFTP 刷机方式，先将电脑与设备连接至同一局域网，并设置电脑 IP 地址与设备默认 IP 在同一网段（如设备默认 IP 为 192.168.1.1，可设置电脑 IP 为 192.168.1.2）。打开 TFTP 刷机工具，将下载好的 OpenWrt 固件文件放置在 TFTP 工具指定的目录下。在设备进入刷机模式后，通过 TFTP 工具进行固件传输，按照工具提示完成刷机过程。刷机过程中，务必确保网络连接稳定，避免中途断电或中断传输，否则可能使设备变砖。</p>
+<p><strong>其他方式刷机</strong>：若使用官方刷机软件，安装并打开软件后，按照软件界面提示，选择对应的设备型号及下载好的 OpenWrt 固件文件，点击刷机按钮开始刷机。整个刷机过程需严格按照软件提示操作，不同软件刷机流程可能有所不同，要仔细阅读软件说明文档。</p>
+<h3 id="（三）等待刷机完成及首次启动"><a href="#（三）等待刷机完成及首次启动" class="headerlink" title="（三）等待刷机完成及首次启动"></a>（三）等待刷机完成及首次启动</h3><p>刷机完成后，设备会自动重启。首次启动 OpenWrt 可能需要较长时间，在此期间，设备指示灯状态可能会发生多次变化。请耐心等待，不要频繁断电或进行其他操作。待设备启动完成，可通过默认 IP 地址（通常为 192.168.1.1 或 192.168.0.1，具体以 OpenWrt 固件说明为准）在浏览器中访问 OpenWrt 管理界面。默认用户名和密码一般为 root 和空（部分二次开发版本可能有所不同，需参考下载页面说明）。</p>
+<h2 id="三、OpenWrt-基础配置详解"><a href="#三、OpenWrt-基础配置详解" class="headerlink" title="三、OpenWrt 基础配置详解"></a>三、OpenWrt 基础配置详解</h2><h3 id="（一）网络连接设置"><a href="#（一）网络连接设置" class="headerlink" title="（一）网络连接设置"></a>（一）网络连接设置</h3><p><strong>PPPoE 拨号设置</strong>：若使用宽带账号拨号上网，登录 OpenWrt 管理界面后，依次点击 “网络”-“接口”，在接口页面中，找到 WAN 接口并点击 “编辑”。将协议（Protocol）从默认的 DHCP 自动获取改为 PPPoE，点击 “切换协议”。然后在弹出的窗口中，准确填入宽带账号和密码，点击 “保存”。若需要对 IPv6 设置或 DNS 等进行更改，可在保存前点击 “高级设置” 进行相应调整。设置完成后，点击页面下方的 “保存并应用”，等待 WAN 接口获取到 IP 地址，网络连接配置完成。</p>
+<p><strong>静态 IP 设置</strong>：若网络环境需要使用静态 IP 地址，同样在 “网络”-“接口”-“WAN” 编辑页面，将协议改为 “静态地址”。在 “常规设置” 中，填入网络管理员分配的 IP 地址、子网掩码、网关及 DNS 服务器地址，点击 “保存并应用”。设置静态 IP 时，要确保填入的信息准确无误，否则可能导致无法正常上网。</p>
+<h3 id="（二）WiFi-设置"><a href="#（二）WiFi-设置" class="headerlink" title="（二）WiFi 设置"></a>（二）WiFi 设置</h3><p><strong>开启 WiFi</strong>：OpenWrt 默认可能未开启 WiFi 功能。依次点击 “网络”-“无线”，进入无线设置页面。其中 “acn” 通常代表 5G 频段，“bgn” 代表 2.4G 频段，需分别进行设置。点击对应频段右侧的 “编辑”，在弹出窗口中勾选 “启用” 以打开 WiFi 功能。</p>
+<p><strong>设置 WiFi 参数</strong>：在 WiFi 编辑页面，可设置信道、带宽、传输功率等参数。信道可根据周围 WiFi 环境选择干扰较少的信道，以提升网络稳定性；带宽可根据设备支持情况及需求选择合适选项；传输功率一般默认即可，若需要扩大 WiFi 覆盖范围，可适当提高传输功率，但可能会增加设备功耗及对其他设备的干扰。“ESSID” 处填写 WiFi 显示名称，在 “无线安全” 页面设置 WiFi 密码，建议采用 WPA2 + CCMP 加密方式，以保障网络安全。设置完成后点击 “保存并应用”。</p>
+<h3 id="（三）防火墙设置"><a href="#（三）防火墙设置" class="headerlink" title="（三）防火墙设置"></a>（三）防火墙设置</h3><p><strong>基础防火墙配置</strong>：OpenWrt 自带防火墙，可有效保护网络安全。点击 “网络”-“防火墙” 进入防火墙设置页面。默认情况下，防火墙已开启基本防护规则。若对防火墙设置不太熟悉，不建议随意更改默认规则，以免影响网络正常使用。若需要开放特定端口，如搭建家庭服务器需要开放 HTTP（80 端口）、HTTPS（443 端口）等端口，可在 “通信规则” 中添加相应规则。添加规则时，要明确源地址、目的地址、协议及端口号等信息，确保规则设置准确。</p>
+<p><strong>添加访客网络防火墙规则（可选）</strong>：若需设置访客网络，除了在网络接口和无线设置中进行相应配置外，还需在防火墙中添加规则，以限制访客网络对内部网络的访问。先新增一个防火墙区域，在防火墙设置页面点击 “新增”，填写区域名称（如 guest），并设置相应的转发策略（一般设置为 “拒绝” 访问内部网络）。然后在 “通信规则” 中，为访客网络的 DHCP 和 DNS 服务添加允许规则，确保访客网络能正常获取 IP 地址及进行域名解析。设置完成后点击 “保存并应用”。</p>
+<h3 id="（四）系统软件管理"><a href="#（四）系统软件管理" class="headerlink" title="（四）系统软件管理"></a>（四）系统软件管理</h3><p><strong>更新系统软件包</strong>：点击 “系统”-“软件”，进入软件管理页面。首次进入可点击 “更新列表”，刷新软件包列表。这一步可能需要较长时间，尤其是在网络环境不佳的情况下。待列表更新完成，可在搜索框中输入需要安装的软件包名称，如安装中文语言包，可输入 “luci - i18n - base - zh - cn”，点击 “OK” 进行安装。安装完成后刷新网页，即可将 OpenWrt 管理界面切换为中文。</p>
+<p><strong>管理已安装软件</strong>：在软件管理页面，可查看已安装的软件包列表。对于不再使用的软件包，可点击软件包右侧的 “删除” 按钮进行卸载，以释放系统资源。同时，可关注软件包的更新信息，及时对已安装软件进行升级，以获取更好的性能及安全性。</p>
+<p>通过以上详细的部署与基础配置步骤，你已成功踏上 OpenWrt 的定制化网络之旅。在后续使用过程中，可根据自身需求进一步探索 OpenWrt 的更多高级功能，如搭建 VPN、实现网络负载均衡等，让网络更好地服务于生活与工作。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/02/VPS%E4%BD%BF%E7%94%A8%E6%97%A5%E5%B8%B8%E6%B3%A8%E6%84%8F%E9%A1%B9/" rel="prev" title="VPS使用日常注意项">
+      <i class="fa fa-chevron-left"></i> VPS使用日常注意项
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/04/12/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E4%BD%BF%E7%94%A8Nginx%E8%BF%9B%E8%A1%8C%E5%8F%8D%E4%BB%A3/" rel="next" title="宝塔面板使用Nginx进行反代">
+      宝塔面板使用Nginx进行反代 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenWrt-%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%85%A8%E6%94%BB%E7%95%A5"><span class="nav-number"></span> <span class="nav-text">OpenWrt 部署与基础配置全攻略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%83%A8%E7%BD%B2%E5%89%8D%E7%9A%84%E7%B2%BE%E5%BF%83%E7%AD%B9%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">一、部署前的精心筹备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E8%AE%BE%E5%A4%87%E9%80%82%E9%85%8D%E6%80%A7%E7%A1%AE%E8%AE%A4"><span class="nav-number">1.1.</span> <span class="nav-text">（一）设备适配性确认</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%A4%87%E4%BB%BD%E9%87%8D%E8%A6%81%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">（二）备份重要数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E5%87%86%E5%A4%87%E5%88%B7%E6%9C%BA%E5%B7%A5%E5%85%B7%E5%8F%8A%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">（三）准备刷机工具及文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81OpenWrt-%E7%9A%84%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">二、OpenWrt 的部署流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E8%BF%9B%E5%85%A5%E8%AE%BE%E5%A4%87%E5%88%B7%E6%9C%BA%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">（一）进入设备刷机模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">（二）刷机操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E7%AD%89%E5%BE%85%E5%88%B7%E6%9C%BA%E5%AE%8C%E6%88%90%E5%8F%8A%E9%A6%96%E6%AC%A1%E5%90%AF%E5%8A%A8"><span class="nav-number">2.3.</span> <span class="nav-text">（三）等待刷机完成及首次启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81OpenWrt-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、OpenWrt 基础配置详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">（一）网络连接设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89WiFi-%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">（二）WiFi 设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E9%98%B2%E7%81%AB%E5%A2%99%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.3.</span> <span class="nav-text">（三）防火墙设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="nav-number">3.4.</span> <span class="nav-text">（四）系统软件管理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiuBenJian"
+      src="/uploads/toux.webp">
+  <p class="site-author-name" itemprop="name">LiuBenJian</p>
+  <div class="site-description" itemprop="description">似懂非懂的小白</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lbjxr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lbjxr" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuBenJian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

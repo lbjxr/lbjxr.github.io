@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lbjxr.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在数字化时代，VPS（虚拟专用服务器）因其灵活性和强大功能，被众多用户用于搭建网站、部署应用程序等工作中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VPS使用日常注意项">
+<meta property="og:url" content="https://lbjxr.github.io/2023/09/02/VPS%E4%BD%BF%E7%94%A8%E6%97%A5%E5%B8%B8%E6%B3%A8%E6%84%8F%E9%A1%B9/index.html">
+<meta property="og:site_name" content="LBJ_Blog">
+<meta property="og:description" content="在数字化时代，VPS（虚拟专用服务器）因其灵活性和强大功能，被众多用户用于搭建网站、部署应用程序等工作中。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p9-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_skill/987ac767-f684-4e41-a450-f434a4f0cc77_1744422379099849006_origin~tplv-a9rns2rl98-image-qvalue.jpeg?rk3s=6823e3d0&x-expires=1775958402&x-signature=IGLm6PWlf/7ixmXy/QQZqs2MNQc=">
+<meta property="article:published_time" content="2023-09-02T01:47:18.000Z">
+<meta property="article:modified_time" content="2023-09-12T01:47:18.000Z">
+<meta property="article:author" content="LiuBenJian">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p9-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_skill/987ac767-f684-4e41-a450-f434a4f0cc77_1744422379099849006_origin~tplv-a9rns2rl98-image-qvalue.jpeg?rk3s=6823e3d0&x-expires=1775958402&x-signature=IGLm6PWlf/7ixmXy/QQZqs2MNQc=">
+
+<link rel="canonical" href="https://lbjxr.github.io/2023/09/02/VPS%E4%BD%BF%E7%94%A8%E6%97%A5%E5%B8%B8%E6%B3%A8%E6%84%8F%E9%A1%B9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>VPS使用日常注意项 | LBJ_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LBJ_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个计算机小白，努力让自己变得多彩</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="Home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="LBJ fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="Tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="Cates fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="Archives fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2023/09/02/VPS%E4%BD%BF%E7%94%A8%E6%97%A5%E5%B8%B8%E6%B3%A8%E6%84%8F%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/toux.webp">
+      <meta itemprop="name" content="LiuBenJian">
+      <meta itemprop="description" content="似懂非懂的小白">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LBJ_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VPS使用日常注意项
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-02 09:47:18" itemprop="dateCreated datePublished" datetime="2023-09-02T09:47:18+08:00">2023-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-12 09:47:18" itemprop="dateModified" datetime="2023-09-12T09:47:18+08:00">2023-09-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">服务器操作</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">在数字化时代，VPS（虚拟专用服务器）因其灵活性和强大功能，被众多用户用于搭建网站、部署应用程序等工作中。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在数字化时代，VPS（虚拟专用服务器）因其灵活性和强大功能，被众多用户用于搭建网站、部署应用程序等工作中。</p>
+<span id="more"></span>
+
+<h1 id="VPS-使用日常注意事项全解析"><a href="#VPS-使用日常注意事项全解析" class="headerlink" title="VPS 使用日常注意事项全解析"></a>VPS 使用日常注意事项全解析</h1><p><img src="https://p9-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_skill/987ac767-f684-4e41-a450-f434a4f0cc77_1744422379099849006_origin~tplv-a9rns2rl98-image-qvalue.jpeg?rk3s=6823e3d0&x-expires=1775958402&x-signature=IGLm6PWlf/7ixmXy/QQZqs2MNQc=" alt="{&quot;type&quot;:&quot;load\_by\_key&quot;,&quot;key&quot;:&quot;banner\_image\_0&quot;,&quot;image\_type&quot;:&quot;search&quot;}"></p>
+<p>在数字化时代，VPS（虚拟专用服务器）因其灵活性和强大功能，被众多用户用于搭建网站、部署应用程序等工作中。然而，若想让 VPS 稳定、安全地运行，在日常使用中，有诸多方面需要留意。接下来，就为大家详细介绍 VPS 使用的日常注意事项，涵盖安全和日常操作两大关键领域。</p>
+<h2 id="安全篇"><a href="#安全篇" class="headerlink" title="安全篇"></a>安全篇</h2><h3 id="谨慎对待端口与密码"><a href="#谨慎对待端口与密码" class="headerlink" title="谨慎对待端口与密码"></a>谨慎对待端口与密码</h3><p>VPS 上的端口犹如房屋的门窗，一旦被恶意利用，黑客便能长驱直入。默认情况下，像 22（SSH 连接）、80（HTTP）、443（HTTPS）等端口常被攻击者重点扫描。因此，建议对重要端口进行修改，例如将 SSH 的默认端口 22 改为一个大于 1024 且小于 65535 的随机端口。但修改端口绝非小事，务必熟悉修改流程后再操作，以免因失误导致无法远程连接服务器。</p>
+<p>密码作为 VPS 安全的重要防线，其强度直接关系到 VPS 的安全性。切勿设置如 “123456”“password” 这类简单易猜的密码，而应使用包含大小写字母、数字和特殊字符的复杂组合，长度尽量在 16 位以上。倘若觉得手动设置复杂密码过于麻烦，可借助专门的密码生成工具，如 1password 等。同时，定期更换密码也是个好习惯，能进一步降低密码被破解的风险。</p>
+<h3 id="防火墙合理配置"><a href="#防火墙合理配置" class="headerlink" title="防火墙合理配置"></a>防火墙合理配置</h3><p>防火墙堪称 VPS 的安全卫士，合理配置防火墙能有效阻挡外部非法访问。但对于不熟悉防火墙设置的用户，贸然开启防火墙可能带来反效果。例如，若在开启防火墙时未将必要的端口设为例外，极有可能导致远程桌面无法登录，进而无法对 VPS 进行管理。若你对防火墙有一定了解，在开启时，务必仔细添加新的端口，确保业务所需的端口能正常通信，像网站运行所需的 80、443 端口，以及自定义的 SSH 端口等。</p>
+<h3 id="远离未知与危险网站"><a href="#远离未知与危险网站" class="headerlink" title="远离未知与危险网站"></a>远离未知与危险网站</h3><p>使用 VPS 时，要像在现实生活中远离危险区域一样，避免访问未知网站。许多未知网站可能暗藏恶意代码或木马程序，一旦访问，这些恶意软件便可能悄无声息地注入到 VPS 中。它们不仅可能窃取 VPS 内的重要信息，甚至会损坏系统，导致 VPS 无法正常启动。因此，要坚守原则，只访问可信赖的正规网站，不给恶意软件可乘之机。</p>
+<h3 id="及时更新系统与软件"><a href="#及时更新系统与软件" class="headerlink" title="及时更新系统与软件"></a>及时更新系统与软件</h3><p>系统和软件开发者会持续修复已知漏洞，因此及时更新 VPS 的操作系统及所安装的软件至关重要。在更新系统时，通常会包含对安全漏洞的修复，能有效提升 VPS 的安全性。例如，若 VPS 使用的是 Debian 或 Ubuntu 系统，可通过执行 “apt upgrade” 命令来更新安装包索引及软件。对于所安装的应用程序，如网站程序、数据库软件等，也要关注官方发布的更新信息，及时进行升级，降低被攻击的风险。</p>
+<h2 id="日常操作篇"><a href="#日常操作篇" class="headerlink" title="日常操作篇"></a>日常操作篇</h2><h3 id="定期备份数据"><a href="#定期备份数据" class="headerlink" title="定期备份数据"></a>定期备份数据</h3><p>数据是 VPS 的核心价值所在，定期备份数据就如同给重要文件买保险。在 VPS 的使用过程中，难免会遇到各种意外情况，如误操作导致数据丢失、硬件故障损坏数据，甚至遭受黑客攻击致使数据被篡改或删除。为避免这些情况带来的巨大损失，务必养成定期备份数据的习惯。备份方式可选择手动定期备份，也可借助自动化备份工具，如一些云存储服务提供的自动备份功能，将重要数据备份到本地或其他安全的存储介质中。</p>
+<h3 id="合理规划资源使用"><a href="#合理规划资源使用" class="headerlink" title="合理规划资源使用"></a>合理规划资源使用</h3><p>VPS 的资源并非无穷无尽，合理规划资源使用才能确保其高效运行。在安装程序和运行服务时，要充分考虑 VPS 的硬件配置，如 CPU、内存、硬盘空间和带宽等。避免安装过多不必要的程序，像 QQ、游戏客户端、视频播放器等，这些程序不仅会占用大量系统资源，还可能因运行过程中的网络请求消耗宝贵的带宽。例如，若在 VPS 上观看在线视频或玩游戏，可能会导致服务器负载过高，影响其他重要业务的正常运行。同时，在下载大型数据和软件时，要根据 VPS 的宽带限制合理设置下载速度，防止因下载占用过多带宽，影响其他用户或自身业务的网络体验。</p>
+<h3 id="密切监控系统状态"><a href="#密切监控系统状态" class="headerlink" title="密切监控系统状态"></a>密切监控系统状态</h3><p>如同医生需要定期检查病人身体状况一样，日常使用 VPS 时，也要密切监控其系统状态。通过一些命令行工具，如 “free -m” 可查看内存使用情况，若发现内存占用过高，需排查是正常业务需求还是存在异常进程；使用 “df -hl” 可检查硬盘分区的使用情况，随着业务发展，若硬盘空间不足，需及时清理不必要的文件或考虑升级硬盘。此外，还可借助一些监控工具，如 Zabbix、Nagios 等，实时监测 VPS 的 CPU 使用率、网络流量、系统负载等关键指标。一旦发现异常，如 CPU 持续高负载、网络流量异常飙升等，能及时进行处理，保障 VPS 的稳定运行。</p>
+<h3 id="规范软件安装与管理"><a href="#规范软件安装与管理" class="headerlink" title="规范软件安装与管理"></a>规范软件安装与管理</h3><p>在 VPS 上安装软件应遵循必要性原则，只安装与业务相关的软件。安装软件时，要确保软件来源可靠，优先从官方正规渠道获取。避免安装破解版或来路不明的软件，这类软件可能被植入恶意代码，给 VPS 带来安全隐患。同时，对于已安装的软件，要定期进行检查和更新，确保软件能正常运行且不存在安全漏洞。对于不再使用的软件，应及时卸载，释放系统资源，保持 VPS 的整洁高效。</p>
+<p>VPS 的安全与日常操作涵盖多个方面，只有在使用过程中时刻保持警惕，严格遵循这些注意事项，才能充分发挥 VPS 的优势，为我们的工作和生活提供稳定、高效的服务支持。希望大家通过本文的介绍，能更好地掌握 VPS 的使用技巧，让 VPS 成为得力的助手。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/25/V2RayN%E5%BC%80%E5%90%AF%E4%BB%A3%E7%90%86%E4%B9%8B%E5%90%8E%E6%9C%AC%E5%9C%B0Host%E6%96%87%E4%BB%B6%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="prev" title="V2RayN开启代理之后本地Host文件失效的问题解决方法">
+      <i class="fa fa-chevron-left"></i> V2RayN开启代理之后本地Host文件失效的问题解决方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/27/OpenWrt%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" rel="next" title="OpenWrt部署与基础配置">
+      OpenWrt部署与基础配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPS-%E4%BD%BF%E7%94%A8%E6%97%A5%E5%B8%B8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%85%A8%E8%A7%A3%E6%9E%90"><span class="nav-number"></span> <span class="nav-text">VPS 使用日常注意事项全解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">安全篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%A8%E6%85%8E%E5%AF%B9%E5%BE%85%E7%AB%AF%E5%8F%A3%E4%B8%8E%E5%AF%86%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">谨慎对待端口与密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E5%90%88%E7%90%86%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">防火墙合理配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A6%BB%E6%9C%AA%E7%9F%A5%E4%B8%8E%E5%8D%B1%E9%99%A9%E7%BD%91%E7%AB%99"><span class="nav-number">1.3.</span> <span class="nav-text">远离未知与危险网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8A%E6%97%B6%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E4%B8%8E%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">及时更新系统与软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%E7%AF%87"><span class="nav-number">2.</span> <span class="nav-text">日常操作篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%9C%9F%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">定期备份数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E7%90%86%E8%A7%84%E5%88%92%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">合理规划资源使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%86%E5%88%87%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81"><span class="nav-number">2.3.</span> <span class="nav-text">密切监控系统状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%A1%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">规范软件安装与管理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiuBenJian"
+      src="/uploads/toux.webp">
+  <p class="site-author-name" itemprop="name">LiuBenJian</p>
+  <div class="site-description" itemprop="description">似懂非懂的小白</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lbjxr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lbjxr" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuBenJian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
