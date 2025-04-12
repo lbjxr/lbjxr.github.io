@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lbjxr.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在数据驱动的时代，数据库管理工具对于程序员而言如同瑞士军刀般不可或缺">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4款免费且实用的数据库管理工具">
+<meta property="og:url" content="https://lbjxr.github.io/2024/12/23/4%E6%AC%BE%E5%85%8D%E8%B4%B9%E4%B8%94%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="LBJ_Blog">
+<meta property="og:description" content="在数据驱动的时代，数据库管理工具对于程序员而言如同瑞士军刀般不可或缺">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dbeaver.io/img/screenshots/screenshot1.png">
+<meta property="og:image" content="https://www.heidisql.com/img/screenshots/connection.png">
+<meta property="og:image" content="https://jookdb.com/img/screenshot.png">
+<meta property="og:image" content="https://www.navicat.com.cn/assets/img/products/navicat-premium-lite/navicat-premium-lite-screenshot.png">
+<meta property="article:published_time" content="2024-12-23T05:20:25.000Z">
+<meta property="article:modified_time" content="2024-12-23T05:20:25.000Z">
+<meta property="article:author" content="LiuBenJian">
+<meta property="article:tag" content="常用工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dbeaver.io/img/screenshots/screenshot1.png">
+
+<link rel="canonical" href="https://lbjxr.github.io/2024/12/23/4%E6%AC%BE%E5%85%8D%E8%B4%B9%E4%B8%94%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>4款免费且实用的数据库管理工具 | LBJ_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LBJ_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个计算机小白，努力让自己变得多彩</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="Home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="LBJ fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="Tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="Cates fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="Archives fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+    <div style="   float: right;">
+        <!-- 代码参考，需要自行调整height和scale数值 -->
+      <iframe frameborder=0 src="https://support.nodeget.com/page/promotion?id=228" style="border-radius:8px; height: 270px;
+              transform: scale(1.0); transform-origin: top left;"></iframe>
+      </div>
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2024/12/23/4%E6%AC%BE%E5%85%8D%E8%B4%B9%E4%B8%94%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/toux.webp">
+      <meta itemprop="name" content="LiuBenJian">
+      <meta itemprop="description" content="似懂非懂的小白">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LBJ_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          4款免费且实用的数据库管理工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-12-23 13:20:25" itemprop="dateCreated datePublished" datetime="2024-12-23T13:20:25+08:00">2024-12-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">常用工具</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">在数据驱动的时代，数据库管理工具对于程序员而言如同瑞士军刀般不可或缺</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在数据驱动的时代，数据库管理工具对于程序员而言如同瑞士军刀般不可或缺。它们不仅能够帮助我们高效地管理数据库，还能提升数据处理的准确性和速度。今天大姚给大家分享 4 款免费且实用的数据库管理工具（排名不分先后，欢迎文末留下你常用的数据库管理工具），希望可以帮助到有需要的同学。</p>
+<span id="more"></span>
+
+<h2 id="一、DBeaver：开源全能型选手"><a href="#一、DBeaver：开源全能型选手" class="headerlink" title="一、DBeaver：开源全能型选手"></a>一、DBeaver：开源全能型选手</h2><h3 id="🛠️-核心特性"><a href="#🛠️-核心特性" class="headerlink" title="🛠️ 核心特性"></a>🛠️ 核心特性</h3><ul>
+<li><strong>全平台支持</strong>：Windows&#x2F;macOS&#x2F;Linux三端覆盖，支持Docker部署</li>
+<li><strong>数据库兼容性</strong>：支持30+数据库（MySQL&#x2F;PostgreSQL&#x2F;Oracle&#x2F;SQLite&#x2F;Redis等）</li>
+<li><strong>功能深度</strong>：可视化查询构建器、数据同步工具、SQL语法高亮、插件扩展生态</li>
+</ul>
+<h3 id="🖥️-操作界面"><a href="#🖥️-操作界面" class="headerlink" title="🖥️ 操作界面"></a>🖥️ 操作界面</h3><p><img src="https://dbeaver.io/img/screenshots/screenshot1.png" alt="DBeaver主界面"><br><em>（来源：DBeaver官网，支持多数据库标签页同时操作）</em></p>
+<h3 id="⬇️-下载与开源"><a href="#⬇️-下载与开源" class="headerlink" title="⬇️ 下载与开源"></a>⬇️ 下载与开源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://dbeaver.io/download">官方下载</a> | <a target="_blank" rel="noopener" href="https://github.com/dbeaver/dbeaver">GitHub开源库</a></li>
+<li>适合场景：企业级多数据库管理、技术深度定制需求</li>
+</ul>
+<h2 id="二、HeidiSQL：Windows轻量首选"><a href="#二、HeidiSQL：Windows轻量首选" class="headerlink" title="二、HeidiSQL：Windows轻量首选"></a>二、HeidiSQL：Windows轻量首选</h2><h3 id="⚡-核心优势"><a href="#⚡-核心优势" class="headerlink" title="⚡ 核心优势"></a>⚡ 核心优势</h3><ul>
+<li><strong>极速启动</strong>：安装包仅20MB，启动速度秒杀同类工具</li>
+<li><strong>专注高效</strong>：极简界面设计，快速完成数据编辑&#x2F;结构管理&#x2F;查询执行</li>
+<li><strong>数据库支持</strong>：MySQL&#x2F;MariaDB&#x2F;SQL Server&#x2F;PostgreSQL&#x2F;SQLite等主流数据库</li>
+</ul>
+<h3 id="🖥️-操作界面-1"><a href="#🖥️-操作界面-1" class="headerlink" title="🖥️ 操作界面"></a>🖥️ 操作界面</h3><p><img src="https://www.heidisql.com/img/screenshots/connection.png" alt="HeidiSQL连接界面"><br><em>（来源：HeidiSQL官网，支持快速数据库连接配置）</em></p>
+<h3 id="⬇️-下载与开源-1"><a href="#⬇️-下载与开源-1" class="headerlink" title="⬇️ 下载与开源"></a>⬇️ 下载与开源</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.heidisql.com/download.php">Windows下载</a> | <a target="_blank" rel="noopener" href="https://github.com/HeidiSQL/HeidiSQL">GitHub开源库</a></li>
+<li>适合场景：中小型项目快速开发、Windows环境高频数据库操作</li>
+</ul>
+<h2 id="三、JookDB：多模数据库统一管理"><a href="#三、JookDB：多模数据库统一管理" class="headerlink" title="三、JookDB：多模数据库统一管理"></a>三、JookDB：多模数据库统一管理</h2><h3 id="🌐-独特价值"><a href="#🌐-独特价值" class="headerlink" title="🌐 独特价值"></a>🌐 独特价值</h3><ul>
+<li><strong>跨栈支持</strong>：同时连接关系型（MySQL&#x2F;PostgreSQL）与非关系型（MongoDB&#x2F;Redis）数据库</li>
+<li><strong>国产化适配</strong>：支持达梦&#x2F;人大金仓&#x2F;OceanBase等国产数据库</li>
+<li><strong>功能均衡</strong>：数据可视化、SQL脚本管理、批量数据导入导出</li>
+</ul>
+<h3 id="🖥️-操作界面-2"><a href="#🖥️-操作界面-2" class="headerlink" title="🖥️ 操作界面"></a>🖥️ 操作界面</h3><p><img src="https://jookdb.com/img/screenshot.png" alt="JookDB主界面"><br><em>（来源：JookDB官网，支持多数据库类型统一管理界面）</em></p>
+<h3 id="⬇️-下载地址"><a href="#⬇️-下载地址" class="headerlink" title="⬇️ 下载地址"></a>⬇️ 下载地址</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://jookdb.com/download.html">全平台下载</a></li>
+<li>适合场景：混合数据库架构项目、国产化数据库适配需求</li>
+</ul>
+<h2 id="四、Navicat-Premium-Lite：专业级精简版"><a href="#四、Navicat-Premium-Lite：专业级精简版" class="headerlink" title="四、Navicat Premium Lite：专业级精简版"></a>四、Navicat Premium Lite：专业级精简版</h2><h3 id="✨-核心亮点"><a href="#✨-核心亮点" class="headerlink" title="✨ 核心亮点"></a>✨ 核心亮点</h3><ul>
+<li><strong>企业友好</strong>：单机构免费5用户授权，支持跨平台使用</li>
+<li><strong>功能精选</strong>：保留Navicat核心功能（SQL编辑&#x2F;数据建模&#x2F;可视化管理）</li>
+<li><strong>云数据库兼容</strong>：支持AWS RDS&#x2F;阿里云&#x2F;腾讯云等主流云数据库</li>
+</ul>
+<h3 id="🖥️-操作界面-3"><a href="#🖥️-操作界面-3" class="headerlink" title="🖥️ 操作界面"></a>🖥️ 操作界面</h3><p><img src="https://www.navicat.com.cn/assets/img/products/navicat-premium-lite/navicat-premium-lite-screenshot.png" alt="Navicat Premium Lite界面"><br><em>（来源：Navicat官网，延续专业级工具的优雅交互）</em></p>
+<h3 id="⬇️-下载地址-1"><a href="#⬇️-下载地址-1" class="headerlink" title="⬇️ 下载地址"></a>⬇️ 下载地址</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.navicat.com.cn/download/navicat-premium-lite">官方免费版</a></li>
+<li>适合场景：团队协作开发、需要标准化工具链的中小型企业</li>
+</ul>
+<h2 id="五、深度对比与选型建议"><a href="#五、深度对比与选型建议" class="headerlink" title="五、深度对比与选型建议"></a>五、深度对比与选型建议</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>DBeaver</th>
+<th>HeidiSQL</th>
+<th>JookDB</th>
+<th>Navicat Lite</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>开源性</strong></td>
+<td>✅ 完全开源</td>
+<td>✅ 开源免费</td>
+<td>❌ 免费闭源</td>
+<td>❌ 免费非开源</td>
+</tr>
+<tr>
+<td><strong>跨平台</strong></td>
+<td>✅ 三端支持</td>
+<td>✅ Windows优先</td>
+<td>✅ 三端支持</td>
+<td>✅ 三端支持</td>
+</tr>
+<tr>
+<td><strong>数据库支持</strong></td>
+<td>30+（含小众库）</td>
+<td>8+主流库</td>
+<td>15+（含国产库）</td>
+<td>10+（含NoSQL）</td>
+</tr>
+<tr>
+<td><strong>界面复杂度</strong></td>
+<td>★★★★☆</td>
+<td>★★☆☆☆</td>
+<td>★★★☆☆</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>适合场景</strong></td>
+<td>企业级开发</td>
+<td>个人快速开发</td>
+<td>混合架构项目</td>
+<td>团队标准化开发</td>
+</tr>
+</tbody></table>
+<h3 id="📌-选择建议："><a href="#📌-选择建议：" class="headerlink" title="📌 选择建议："></a>📌 选择建议：</h3><ol>
+<li><strong>技术极客</strong>：DBeaver（开源生态+深度定制）</li>
+<li><strong>Windows用户</strong>：HeidiSQL（轻量极速+简洁界面）</li>
+<li><strong>混合架构</strong>：JookDB（多模支持+国产适配）</li>
+<li><strong>团队协作</strong>：Navicat Lite（专业体验+免费授权）</li>
+</ol>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>这4款工具覆盖了从个人开发者到企业团队的不同需求：  </p>
+<ul>
+<li>追求开源自由选<strong>DBeaver</strong>  </li>
+<li>Windows轻量操作选<strong>HeidiSQL</strong>  </li>
+<li>多模数据库管理选<strong>JookDB</strong>  </li>
+<li>专业级精简体验选<strong>Navicat Lite</strong></li>
+</ul>
+<p>点击各工具下载链接即可获取官方安装包，建议根据实际开发场景选择2-3款搭配使用，提升数据库管理效率！如果你有常用的宝藏工具，欢迎在评论区分享交流~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag"># 常用工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/27/OpenWrt%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" rel="prev" title="OpenWrt部署与基础配置">
+      <i class="fa fa-chevron-left"></i> OpenWrt部署与基础配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/04/12/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E4%BD%BF%E7%94%A8Nginx%E8%BF%9B%E8%A1%8C%E5%8F%8D%E4%BB%A3/" rel="next" title="宝塔面板使用Nginx进行反代">
+      宝塔面板使用Nginx进行反代 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81DBeaver%EF%BC%9A%E5%BC%80%E6%BA%90%E5%85%A8%E8%83%BD%E5%9E%8B%E9%80%89%E6%89%8B"><span class="nav-number">2.</span> <span class="nav-text">一、DBeaver：开源全能型选手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">🛠️ 核心特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%96%A5%EF%B8%8F-%E6%93%8D%E4%BD%9C%E7%95%8C%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">🖥️ 操作界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%AC%87%EF%B8%8F-%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%BC%80%E6%BA%90"><span class="nav-number">2.3.</span> <span class="nav-text">⬇️ 下载与开源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81HeidiSQL%EF%BC%9AWindows%E8%BD%BB%E9%87%8F%E9%A6%96%E9%80%89"><span class="nav-number">3.</span> <span class="nav-text">二、HeidiSQL：Windows轻量首选</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%A1-%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8A%BF"><span class="nav-number">3.1.</span> <span class="nav-text">⚡ 核心优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%96%A5%EF%B8%8F-%E6%93%8D%E4%BD%9C%E7%95%8C%E9%9D%A2-1"><span class="nav-number">3.2.</span> <span class="nav-text">🖥️ 操作界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%AC%87%EF%B8%8F-%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%BC%80%E6%BA%90-1"><span class="nav-number">3.3.</span> <span class="nav-text">⬇️ 下载与开源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81JookDB%EF%BC%9A%E5%A4%9A%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%9F%E4%B8%80%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">三、JookDB：多模数据库统一管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8C%90-%E7%8B%AC%E7%89%B9%E4%BB%B7%E5%80%BC"><span class="nav-number">4.1.</span> <span class="nav-text">🌐 独特价值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%96%A5%EF%B8%8F-%E6%93%8D%E4%BD%9C%E7%95%8C%E9%9D%A2-2"><span class="nav-number">4.2.</span> <span class="nav-text">🖥️ 操作界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%AC%87%EF%B8%8F-%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="nav-number">4.3.</span> <span class="nav-text">⬇️ 下载地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Navicat-Premium-Lite%EF%BC%9A%E4%B8%93%E4%B8%9A%E7%BA%A7%E7%B2%BE%E7%AE%80%E7%89%88"><span class="nav-number">5.</span> <span class="nav-text">四、Navicat Premium Lite：专业级精简版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%A8-%E6%A0%B8%E5%BF%83%E4%BA%AE%E7%82%B9"><span class="nav-number">5.1.</span> <span class="nav-text">✨ 核心亮点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%96%A5%EF%B8%8F-%E6%93%8D%E4%BD%9C%E7%95%8C%E9%9D%A2-3"><span class="nav-number">5.2.</span> <span class="nav-text">🖥️ 操作界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%AC%87%EF%B8%8F-%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80-1"><span class="nav-number">5.3.</span> <span class="nav-text">⬇️ 下载地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E5%9E%8B%E5%BB%BA%E8%AE%AE"><span class="nav-number">6.</span> <span class="nav-text">五、深度对比与选型建议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8C-%E9%80%89%E6%8B%A9%E5%BB%BA%E8%AE%AE%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">📌 选择建议：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">六、总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiuBenJian"
+      src="/uploads/toux.webp">
+  <p class="site-author-name" itemprop="name">LiuBenJian</p>
+  <div class="site-description" itemprop="description">似懂非懂的小白</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lbjxr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lbjxr" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuBenJian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
