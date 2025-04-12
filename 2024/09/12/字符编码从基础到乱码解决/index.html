@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lbjxr.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在计算机的世界里，字符编码就像是一门特殊的语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符编码从基础到乱码解决">
+<meta property="og:url" content="https://lbjxr.github.io/2024/09/12/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3/index.html">
+<meta property="og:site_name" content="LBJ_Blog">
+<meta property="og:description" content="在计算机的世界里，字符编码就像是一门特殊的语言">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-12T05:52:25.000Z">
+<meta property="article:modified_time" content="2024-09-12T05:52:25.000Z">
+<meta property="article:author" content="LiuBenJian">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lbjxr.github.io/2024/09/12/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>字符编码从基础到乱码解决 | LBJ_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LBJ_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个计算机小白，努力让自己变得多彩</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="Home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="LBJ fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="Tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="Cates fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="Archives fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+    <div style="   float: right;">
+        <!-- 代码参考，需要自行调整height和scale数值 -->
+      <iframe frameborder=0 src="https://support.nodeget.com/page/promotion?id=228" style="border-radius:8px; height: 270px;
+              transform: scale(1.0); transform-origin: top left;"></iframe>
+      </div>
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2024/09/12/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/toux.webp">
+      <meta itemprop="name" content="LiuBenJian">
+      <meta itemprop="description" content="似懂非懂的小白">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LBJ_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          字符编码从基础到乱码解决
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-12 13:52:25" itemprop="dateCreated datePublished" datetime="2024-09-12T13:52:25+08:00">2024-09-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">在计算机的世界里，字符编码就像是一门特殊的语言</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><span id="more"></span>
+
+<p>在计算机的世界里，字符编码就像是一门特殊的语言，它负责让计算机能够理解和处理人类使用的各种字符。无论是我们日常在网页上看到的文字，还是在文档中编辑的内容，背后都离不开字符编码的支持。今天，就让我们一起深入探索字符编码的奥秘，从基础概念开始，一直到解决令人头疼的乱码问题。</p>
+<h2 id="一、字符编码的基本概念"><a href="#一、字符编码的基本概念" class="headerlink" title="一、字符编码的基本概念"></a>一、字符编码的基本概念</h2><h3 id="（一）什么是字符编码"><a href="#（一）什么是字符编码" class="headerlink" title="（一）什么是字符编码"></a>（一）什么是字符编码</h3><p>简单来说，字符编码是一套规则，它定义了如何将字符集中的字符映射为计算机能够存储和处理的二进制数字。字符集就是一系列字符的集合，比如常见的英文字符集包含了 26 个英文字母（大小写）、数字以及一些标点符号。而计算机只能理解二进制数据，也就是 0 和 1 的序列。所以，字符编码就是搭建起字符与二进制之间的桥梁。</p>
+<h3 id="（二）常见的字符编码"><a href="#（二）常见的字符编码" class="headerlink" title="（二）常见的字符编码"></a>（二）常见的字符编码</h3><p><strong>ASCII 编码</strong></p>
+<p>ASCII 编码是最早出现的字符编码之一，它主要用于表示英文字符。ASCII 编码使用 7 位二进制数来表示一个字符，总共可以表示 128 个不同的字符，包括英文字母、数字、标点符号等。例如，大写字母 ‘A’ 在 ASCII 编码中的值是 65，对应的二进制表示就是 01000001。ASCII 编码的优点是简单直观，在早期的计算机系统中得到了广泛应用。[此处可插入一张 ASCII 编码表的图片，展示部分字符及其对应的二进制值]</p>
+<p><strong>Unicode 编码</strong></p>
+<p>随着计算机在全球范围内的普及，ASCII 编码的局限性逐渐显现出来，因为它只能表示英文字符，无法满足其他语言文字的需求。Unicode 编码应运而生，它旨在为世界上所有的字符提供一个统一的编码标准。Unicode 编码有多种编码形式，最常见的是 UTF - 8、UTF - 16 和 UTF - 32。</p>
+<p><strong>UTF - 8</strong>：UTF - 8 是一种变长编码，它可以使用 1 到 4 个字节来表示一个字符。对于英文字符，UTF - 8 编码与 ASCII 编码相同，使用 1 个字节；而对于中文字符等其他非英文字符，通常使用 3 个字节。UTF - 8 的优势在于它的兼容性好，能够很好地兼容 ASCII 编码，并且在网络传输和存储方面也比较高效。例如，汉字 “中” 的 UTF - 8 编码是 E4 B8 AD，占用 3 个字节。[此处可插入一张 UTF - 8 编码规则的图片，解释不同字节数对应的字符范围]</p>
+<p><strong>UTF - 16</strong>：UTF - 16 编码通常使用 2 个字节来表示一个字符，但对于一些特殊字符（如补充平面的字符），需要使用 4 个字节。它在处理 Unicode 字符时相对比较直接，但对于大量英文字符的场景，会比 UTF - 8 占用更多的存储空间。</p>
+<p><strong>UTF - 32</strong>：UTF - 32 编码使用固定的 4 个字节来表示每一个字符，这种编码方式简单直接，但是会占用较多的存储空间，在实际应用中使用相对较少。</p>
+<h2 id="二、乱码问题及解决方法"><a href="#二、乱码问题及解决方法" class="headerlink" title="二、乱码问题及解决方法"></a>二、乱码问题及解决方法</h2><h3 id="（一）乱码是如何产生的"><a href="#（一）乱码是如何产生的" class="headerlink" title="（一）乱码是如何产生的"></a>（一）乱码是如何产生的</h3><p>乱码的出现通常是因为在字符编码的转换过程中出现了错误。当我们在一个使用某种字符编码的环境中读取或显示一个按照另一种字符编码存储的数据时，就可能会出现乱码。例如，假设一个文本文件是按照 UTF - 8 编码保存的，但在读取时却被错误地当作 GB2312 编码来解析，那么原本正常显示的字符就可能变成一堆乱码。这是因为两种编码对于字符的二进制表示是不同的，错误的解析会导致字符无法正确还原。</p>
+<h3 id="（二）解决乱码问题的方法"><a href="#（二）解决乱码问题的方法" class="headerlink" title="（二）解决乱码问题的方法"></a>（二）解决乱码问题的方法</h3><p><strong>确定正确的字符编码</strong></p>
+<p>首先，要明确原始数据的字符编码。如果是从网络上获取的数据，服务器通常会在响应头中告知数据的字符编码。例如，在 HTTP 协议中，Content - Type 头字段会包含字符编码信息，如 “text&#x2F;html; charset&#x3D;UTF - 8”。对于本地文件，可以查看文件的属性或者尝试使用一些文本编辑器，这些编辑器通常会自动检测并显示文件的字符编码。如果不确定，可以通过一些编码检测工具来辅助判断。</p>
+<p><strong>统一字符编码</strong></p>
+<p>在程序中处理数据时，要确保在不同的环节使用统一的字符编码。例如，在读取文件时，指定正确的字符编码来读取数据。在 Python 中，可以使用以下代码来读取一个 UTF - 8 编码的文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with open(&#x27;file.txt&#x27;, &#x27;r&#x27;, encoding=&#x27;utf - 8&#x27;) as f:</span><br><span class="line"></span><br><span class="line">&amp;#x20;   content = f.read()</span><br></pre></td></tr></table></figure>
+
+<p>在进行网络请求时，也要设置正确的字符编码。例如，使用 Python 的 requests 库发送 HTTP 请求时，可以这样设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">response = requests.get(&#x27;http://example.com&#x27;, headers=&#123;&#x27;Accept - Charset&#x27;: &#x27;utf - 8&#x27;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>转码操作</strong></p>
+<p>如果需要在不同的字符编码之间进行转换，可以使用相应的库或工具。在 Java 中，可以使用<code>java.nio.charset.Charset</code>类来进行字符编码的转换。例如，将一个字符串从 GB2312 编码转换为 UTF - 8 编码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import java.nio.charset.Charset;</span><br><span class="line"></span><br><span class="line">import java.nio.charset.StandardCharsets;</span><br><span class="line"></span><br><span class="line">public class EncodingConverter &#123;</span><br><span class="line"></span><br><span class="line">&amp;#x20;   public static void main(String\[] args) &#123;</span><br><span class="line"></span><br><span class="line">&amp;#x20;       String original = &quot;你好&quot;;</span><br><span class="line"></span><br><span class="line">&amp;#x20;       byte\[] gb2312Bytes = original.getBytes(Charset.forName(&quot;GB2312&quot;));</span><br><span class="line"></span><br><span class="line">&amp;#x20;       String utf8String = new String(gb2312Bytes, StandardCharsets.UTF\_8);</span><br><span class="line"></span><br><span class="line">&amp;#x20;       System.out.println(utf8String);</span><br><span class="line"></span><br><span class="line">&amp;#x20;   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 Python 中，也有类似的功能。例如，将一个字节串从 GBK 编码转换为 UTF - 8 编码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;你好&quot;.encode(&#x27;gbk&#x27;)</span><br><span class="line"></span><br><span class="line">s = s.decode(&#x27;gbk&#x27;).encode(&#x27;utf - 8&#x27;)</span><br><span class="line"></span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+
+<p>通过以上对字符编码基本概念的介绍以及乱码问题解决方法的探讨，希望大家能够对字符编码有更深入的理解，在日常的编程和计算机使用过程中，能够更加从容地应对字符编码相关的问题。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/27/OpenWrt%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" rel="prev" title="OpenWrt部署与基础配置">
+      <i class="fa fa-chevron-left"></i> OpenWrt部署与基础配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/12/23/4%E6%AC%BE%E5%85%8D%E8%B4%B9%E4%B8%94%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" rel="next" title="4款免费且实用的数据库管理工具">
+      4款免费且实用的数据库管理工具 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">一、字符编码的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">2.1.</span> <span class="nav-text">（一）什么是字符编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">（二）常见的字符编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">二、乱码问题及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%B1%E7%A0%81%E6%98%AF%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">（一）乱码是如何产生的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E8%A7%A3%E5%86%B3%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">（二）解决乱码问题的方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiuBenJian"
+      src="/uploads/toux.webp">
+  <p class="site-author-name" itemprop="name">LiuBenJian</p>
+  <div class="site-description" itemprop="description">似懂非懂的小白</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lbjxr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lbjxr" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuBenJian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
