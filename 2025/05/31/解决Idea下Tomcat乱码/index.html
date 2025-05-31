@@ -20,17 +20,25 @@
     var CONFIG = {"hostname":"lbjxr.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="似懂非懂的小白">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LBJ_Blog">
-<meta property="og:url" content="https://lbjxr.github.io/archives/2024/12/index.html">
+  <meta name="description" content="前言我们在配置好 Tomcat 服务后（详见此处），总是会在控制台看到类似于这样的信息显然，这是发生了乱码，虽然不影响正常的项目调试，但是看着非常的难受，下面让我们一招来解决这个问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决Idea下Tomcat乱码">
+<meta property="og:url" content="https://lbjxr.github.io/2025/05/31/%E8%A7%A3%E5%86%B3Idea%E4%B8%8BTomcat%E4%B9%B1%E7%A0%81/index.html">
 <meta property="og:site_name" content="LBJ_Blog">
-<meta property="og:description" content="似懂非懂的小白">
+<meta property="og:description" content="前言我们在配置好 Tomcat 服务后（详见此处），总是会在控制台看到类似于这样的信息显然，这是发生了乱码，虽然不影响正常的项目调试，但是看着非常的难受，下面让我们一招来解决这个问题">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c40274fe57ff44b2baef1eafcc754b0f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7f159b2b7f9342d0a453a77cd887f3a4.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6c17ed5ee3c2467e88f6a747502967ac.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ee2b7598efb543d882c559fbb1b3ad7e.png">
+<meta property="article:published_time" content="2025-05-31T08:13:55.000Z">
+<meta property="article:modified_time" content="2025-05-31T08:13:55.000Z">
 <meta property="article:author" content="LiuBenJian">
+<meta property="article:tag" content="idea">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/c40274fe57ff44b2baef1eafcc754b0f.png">
 
-<link rel="canonical" href="https://lbjxr.github.io/archives/2024/12/">
+<link rel="canonical" href="https://lbjxr.github.io/2025/05/31/%E8%A7%A3%E5%86%B3Idea%E4%B8%8BTomcat%E4%B9%B1%E7%A0%81/">
 
 
 <script id="page-configurations">
@@ -38,12 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | LBJ_Blog</title>
+  <title>解决Idea下Tomcat乱码 | LBJ_Blog</title>
   
 
 
@@ -162,50 +170,107 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 14 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2025/05/31/%E8%A7%A3%E5%86%B3Idea%E4%B8%8BTomcat%E4%B9%B1%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/toux.webp">
+      <meta itemprop="name" content="LiuBenJian">
+      <meta itemprop="description" content="似懂非懂的小白">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LBJ_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          解决Idea下Tomcat乱码
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-05-31 16:13:55" itemprop="dateCreated datePublished" datetime="2025-05-31T16:13:55+08:00">2025-05-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们在配置好 Tomcat 服务后（<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51269961/article/details/123643990">详见此处</a>），总是会在控制台看到类似于这样的信息<br>显然，这是发生了乱码，虽然不影响正常的项目调试，但是看着非常的难受，下面让我们一招来解决这个问题</p>
+<span id="more"></span>
+
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>控制台输出信息</p>
+<blockquote>
+<p>12-Apr-2022 15:45:44.180 璀﹀憡 [main] org.apache.catalina.startup.SetAllPropertiesRule.begin [SetAllPropertiesRule]{Server&#x2F;Service&#x2F;Connector} Setting property ‘URLEncoding’ to ‘UTF-8’ did not find a matching property.<br>12-Apr-2022 15:45:44.213 淇℃伅 [main] org.apache.catalina.startup.VersionLoggerListener.log Server.鏈嶅姟鍣ㄧ増鏈�: Apache Tomcat&#x2F;8.5.77<br>12-Apr-2022 15:45:44.213 淇℃伅 [main] org.apache.catalina.startup.VersionLoggerListener.log 鏈嶅姟鍣ㄦ瀯寤�: Mar 13 2022 19:13:33 UTC<br>12-Apr-2022 15:45:44.213 淇℃伅 [main] org.apache.catalina.startup.VersionLoggerListener.log 鏈嶅姟鍣ㄧ増鏈彿: 8.5.77.0<br>12-Apr-2022 15:45:44.213 淇℃伅 [main] org.apache.catalina.startup.VersionLoggerListener.log 鎿嶄綔绯荤粺鍚嶇О: Windows 10<br>……</p>
+</blockquote>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>找了很多的解决方案，但是日志文件和控制台信息只能解决一个，不能兼得，下面给出最佳方案</p>
+<p><strong>1.打开 Tomcat 安装目录并找到 conf 文件夹</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/c40274fe57ff44b2baef1eafcc754b0f.png"></p>
+<p><strong>2.用记事本打开 conf 文件夹下的 logging.properties 文件</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/7f159b2b7f9342d0a453a77cd887f3a4.png"></p>
+<p><strong>3.将文件中所有的 UTF-8 修改为 GBK 并保存</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/6c17ed5ee3c2467e88f6a747502967ac.png"></p>
+<h1 id="操作验证"><a href="#操作验证" class="headerlink" title="操作验证"></a>操作验证</h1><p>重启 Idea 再次调试，查看控制台信息</p>
+<p><img src="https://img-blog.csdnimg.cn/ee2b7598efb543d882c559fbb1b3ad7e.png"></p>
+<p>乱码情况已解决</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-12-23T13:20:25+08:00"
-              content="2024-12-23">
-          12-23
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/idea/" rel="tag"># idea</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/12/23/4%E6%AC%BE%E5%85%8D%E8%B4%B9%E4%B8%94%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" itemprop="url">
-            <span itemprop="name">4款免费且实用的数据库管理工具</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/12/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2%E7%9A%84%E8%AF%B4%E6%98%8E/" rel="prev" title="关于博客主题更换的说明">
+      <i class="fa fa-chevron-left"></i> 关于博客主题更换的说明
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/05/31/%E8%87%AA%E5%8A%A9%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E7%9A%84ssl%E8%AF%81%E4%B9%A6/" rel="next" title="自助申请免费的ssl证书">
+      自助申请免费的ssl证书 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -258,6 +323,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number"></span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number"></span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E9%AA%8C%E8%AF%81"><span class="nav-number"></span> <span class="nav-text">操作验证</span></a></div>
       </div>
       <!--/noindex-->
 
