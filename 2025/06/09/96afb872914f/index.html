@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"lbjxr.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="必要前提： 你必须要拥有一个可控的域名以debian为例写一个简单可用的教程,理论上linux都能用。文章中提到的 mydomain.com 须替换成你自己的域名">
+  <meta name="description" content="前言一开始我把CNAME文件直接放在hexo&#x2F;public目录下，但是每次执行hexo clean后它就会被删除。后来我改为在GitHub项目的设置-&gt;选项-&gt;GitHub Pages的自定义域名中设置域名，如下图所示，但实际上这种方法与上面的方法没什么区别，也是会在GitHub项目根目录下（也就是Hexo的public目录下）生成一个CNAME文件，在执行hexo clea">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自助申请免费的ssl证书">
-<meta property="og:url" content="https://lbjxr.github.io/2025/05/31/%E8%87%AA%E5%8A%A9%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E7%9A%84ssl%E8%AF%81%E4%B9%A6/index.html">
+<meta property="og:title" content="Hexo发布到Github丢失readme和CNAME解决方案">
+<meta property="og:url" content="https://lbjxr.github.io/2025/06/09/96afb872914f/index.html">
 <meta property="og:site_name" content="LBJ_Blog">
-<meta property="og:description" content="必要前提： 你必须要拥有一个可控的域名以debian为例写一个简单可用的教程,理论上linux都能用。文章中提到的 mydomain.com 须替换成你自己的域名">
+<meta property="og:description" content="前言一开始我把CNAME文件直接放在hexo&#x2F;public目录下，但是每次执行hexo clean后它就会被删除。后来我改为在GitHub项目的设置-&gt;选项-&gt;GitHub Pages的自定义域名中设置域名，如下图所示，但实际上这种方法与上面的方法没什么区别，也是会在GitHub项目根目录下（也就是Hexo的public目录下）生成一个CNAME文件，在执行hexo clea">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-05-31T08:14:06.000Z">
-<meta property="article:modified_time" content="2025-05-31T08:14:06.000Z">
+<meta property="article:published_time" content="2025-06-09T01:25:24.000Z">
+<meta property="article:modified_time" content="2025-06-09T01:25:24.000Z">
 <meta property="article:author" content="LiuBenJian">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lbjxr.github.io/2025/05/31/%E8%87%AA%E5%8A%A9%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E7%9A%84ssl%E8%AF%81%E4%B9%A6/">
+<link rel="canonical" href="https://lbjxr.github.io/2025/06/09/96afb872914f/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>自助申请免费的ssl证书 | LBJ_Blog</title>
+  <title>Hexo发布到Github丢失readme和CNAME解决方案 | LBJ_Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKE3SF96M9"></script>
     <script>
@@ -180,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2025/05/31/%E8%87%AA%E5%8A%A9%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E7%9A%84ssl%E8%AF%81%E4%B9%A6/">
+    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2025/06/09/96afb872914f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/toux.webp">
@@ -193,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          自助申请免费的ssl证书
+          Hexo发布到Github丢失readme和CNAME解决方案
         </h1>
 
         <div class="post-meta">
@@ -203,7 +203,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-05-31 16:14:06" itemprop="dateCreated datePublished" datetime="2025-05-31T16:14:06+08:00">2025-05-31</time>
+              <time title="创建时间：2025-06-09 09:25:24" itemprop="dateCreated datePublished" datetime="2025-06-09T09:25:24+08:00">2025-06-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -211,7 +211,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">服务器</span></a>
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">服务器操作</span></a>
                 </span>
             </span>
 
@@ -226,41 +226,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h5 id="必要前提：-你必须要拥有一个可控的域名"><a href="#必要前提：-你必须要拥有一个可控的域名" class="headerlink" title="必要前提： 你必须要拥有一个可控的域名"></a>必要前提： 你必须要拥有一个可控的域名</h5><p>以debian为例写一个简单可用的教程,理论上linux都能用。<br>文章中提到的 mydomain.com 须替换成你自己的域名</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一开始我把CNAME文件直接放在hexo&#x2F;public目录下，但是每次执行hexo clean后它就会被删除。<br>后来我改为在GitHub项目的设置-&gt;选项-&gt;GitHub Pages的自定义域名中设置域名，如下图所示，但实际上这种方法与上面的方法没什么区别，也是会在GitHub项目根目录下（也就是Hexo的public目录下）生成一个CNAME文件，在执行hexo clean后该文件仍然会被删除。</p>
 <span id="more"></span>
-
-<p>1.下载并配置acme.sh环境（<a href="mailto:&#x64;&#101;&#109;&#x6f;&#x40;&#x6d;&#121;&#x64;&#111;&#x6d;&#x61;&#105;&#110;&#x2e;&#x63;&#x6f;&#109;">demo@mydomain.com</a> 修改成你的邮箱）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh -s email=demo@mydomain.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>如果出现 Install success 类似字样则说明配置成功；如果邮箱写错了，可以编辑 $HOME&#x2F;.acme.sh&#x2F;account.conf 进行修改。</p>
-<p>2.查看是否开启自动续期</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>如果出现 “&#x2F;root&#x2F;.acme.sh”&#x2F;acme.sh –cron –home “&#x2F;root&#x2F;.acme.sh” &gt; &#x2F;dev&#x2F;null<br>类似字样则表明已经开启自动续期</p>
-<p>3.使环境配置立即生效</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>4.配置证书申请源 （zerossl letsencrypt buypass ssl.com google）<br>建议zerossl，因为letsencrypt越来越不被信任。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --set-default-ca --server zerossl</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>如果出现 Changed default CA to: <a target="_blank" rel="noopener" href="https://acme.zerossl.com/v2/DV90">https://acme.zerossl.com/v2/DV90</a> 类似字样则说明切换成功</p>
-<p>证书申请分为两种</p>
-<p>手动申请<br>步骤1</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --issue --dns -d mydomain.com -d *.mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>返回信息<br>Domain: ‘acme-challenge.mydomain.com’<br>TXT value: ‘校验码’<br>这个TXT出现几次就添加几条acme-challenge的TXT解析记录<br>大约过10分钟左右(跟域名托管商有关)</p>
-<p>步骤2</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --renew --dns -d mydomain.com -d *.mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>如果出现 Cert success 类似字样则表明申请成功。<br>生成的证书文件都在以下目录中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$HOME/.acme.sh/mydomain.com_ecc/mydomain.com.key   Key文件</span><br><span class="line">$HOME/.acme.sh/mydomain.com_ecc/mydomain.com.cer</span><br><span class="line">$HOME/.acme.sh/mydomain.com_ecc/ca.cer</span><br><span class="line">$HOME/.acme.sh/mydomain.com_ecc/fullchain.cer      完整证书链</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>一般只需要用到mydomain.com.key 和 fullchain.cer<br>自动申请<br>acme.sh代码中 <a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/tree/master/dnsapi">https://github.com/acmesh-official/acme.sh/tree/master/dnsapi</a> 提供了很多域名托管商API接口，一般sh文件开头的几行会有需要提供的变量信息</p>
-<p>这里以cloudflare为例 需要提供的环境变量如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export CF_Token=&quot;&quot;</span><br><span class="line">export CF_Account_ID=&quot;&quot;</span><br><span class="line">export CF_Zone_ID=&quot;&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export CF_Key=&quot;&quot;</span><br><span class="line">export CF_Email=&quot;&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>然后执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --issue --dns dns_cf -d mydomain.com -d *.mydomain.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>同样会出现 success 类似字样的返回信息</p>
-<p>手动申请和自动申请生成结果一样，证书都在同一个位置。</p>
-<p>这个tls证书申请成功后，可以运用到各种tls的场景中，不需要再 忽略证书校验 等操作，客户端服务端做到完全可信。</p>
-<p>最后啰嗦一下：这个证书是90天一续，一定要准时检查，看是否自动续期成功。<br>$HOME是环境变量指向的是用户主目录，一般为&#x2F;root<br>今天主要介绍的是如何申请可信证书和自动续期，如果有把证书部署到nginx等场景需求的建议去 <a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh">https://github.com/acmesh-official/acme.sh</a> 查看相应文档。</p>
+<p>方法一（推荐）：将需要上传至github的内容放在source文件夹，例如CNAME、favicon.ico、images等，这样在 hexo d 之后就不会被删除了。<br>方法二：安装插件实现永久保留.<br>$ npm install hexo-generator-cname –save &#x2F;&#x2F;安装此插件实现<br>之后在_config.yml中添加一条<br>Copy<br>Plugins:<br>hexo-generator-cname<br>需要注意的是：如果是在github上建立的CNAME文件，需要先clone到本地，然后安装插件，在deploy上去即可。CNAME只允许一个域名地址。</p>
 
     </div>
 
@@ -279,13 +247,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/05/31/%E8%A7%A3%E5%86%B3Idea%E4%B8%8BTomcat%E4%B9%B1%E7%A0%81/" rel="prev" title="解决Idea下Tomcat乱码">
-      <i class="fa fa-chevron-left"></i> 解决Idea下Tomcat乱码
+    <a href="/2025/05/31/0655c47bcbbf/" rel="prev" title="关于博客域名更新的重要通知">
+      <i class="fa fa-chevron-left"></i> 关于博客域名更新的重要通知
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/05/31/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E6%9B%B4%E6%96%B0%E7%9A%84%E9%87%8D%E8%A6%81%E9%80%9A%E7%9F%A5/" rel="next" title="关于博客域名更新的重要通知">
-      关于博客域名更新的重要通知 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -344,7 +309,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BF%85%E8%A6%81%E5%89%8D%E6%8F%90%EF%BC%9A-%E4%BD%A0%E5%BF%85%E9%A1%BB%E8%A6%81%E6%8B%A5%E6%9C%89%E4%B8%80%E4%B8%AA%E5%8F%AF%E6%8E%A7%E7%9A%84%E5%9F%9F%E5%90%8D"><span class="nav-number">1.</span> <span class="nav-text">必要前提： 你必须要拥有一个可控的域名</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -360,7 +325,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
