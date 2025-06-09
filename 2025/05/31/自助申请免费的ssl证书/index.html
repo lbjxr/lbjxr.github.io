@@ -48,6 +48,14 @@
 
   <title>自助申请免费的ssl证书 | LBJ_Blog</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKE3SF96M9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GKE3SF96M9');
+    </script>
 
 
 
@@ -221,7 +229,7 @@
         <h5 id="必要前提：-你必须要拥有一个可控的域名"><a href="#必要前提：-你必须要拥有一个可控的域名" class="headerlink" title="必要前提： 你必须要拥有一个可控的域名"></a>必要前提： 你必须要拥有一个可控的域名</h5><p>以debian为例写一个简单可用的教程,理论上linux都能用。<br>文章中提到的 mydomain.com 须替换成你自己的域名</p>
 <span id="more"></span>
 
-<p>1.下载并配置acme.sh环境（<a href="mailto:&#100;&#x65;&#109;&#x6f;&#64;&#109;&#121;&#100;&#x6f;&#109;&#97;&#x69;&#110;&#46;&#x63;&#111;&#x6d;">demo@mydomain.com</a> 修改成你的邮箱）</p>
+<p>1.下载并配置acme.sh环境（<a href="mailto:&#x64;&#101;&#109;&#x6f;&#x40;&#x6d;&#121;&#x64;&#111;&#x6d;&#x61;&#105;&#110;&#x2e;&#x63;&#x6f;&#109;">demo@mydomain.com</a> 修改成你的邮箱）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh -s email=demo@mydomain.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>如果出现 Install success 类似字样则说明配置成功；如果邮箱写错了，可以编辑 $HOME&#x2F;.acme.sh&#x2F;account.conf 进行修改。</p>
