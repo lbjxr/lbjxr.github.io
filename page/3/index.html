@@ -20,33 +20,30 @@
     var CONFIG = {"hostname":"lbjxr.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="简介vsftpd 是“very secure FTP daemon”的缩写，安全性是它的一个最大的特点。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="远程服务器搭建vsftpd">
-<meta property="og:url" content="https://lbjxr.github.io/2018/02/12/b18aeb05c8c1/index.html">
+  <meta name="description" content="似懂非懂的小白">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LBJ_Blog">
+<meta property="og:url" content="https://lbjxr.github.io/page/3/index.html">
 <meta property="og:site_name" content="LBJ_Blog">
-<meta property="og:description" content="简介vsftpd 是“very secure FTP daemon”的缩写，安全性是它的一个最大的特点。">
+<meta property="og:description" content="似懂非懂的小白">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2018-02-12T07:14:30.000Z">
-<meta property="article:modified_time" content="2018-02-12T07:14:30.000Z">
 <meta property="article:author" content="LiuBenJian">
-<meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lbjxr.github.io/2018/02/12/b18aeb05c8c1/">
+<link rel="canonical" href="https://lbjxr.github.io/page/3/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
-    isPost : true,
+    isHome : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>远程服务器搭建vsftpd | LBJ_Blog</title>
+  <title>LBJ_Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKE3SF96M9"></script>
     <script>
@@ -170,14 +167,13 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content index posts-expand">
             
-
-    
+      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2018/02/12/b18aeb05c8c1/">
+    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2017/11/12/4beeae268314/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/toux.webp">
@@ -189,9 +185,10 @@
       <meta itemprop="name" content="LBJ_Blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          远程服务器搭建vsftpd
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/11/12/4beeae268314/" class="post-title-link" itemprop="url">熟悉的陌生人</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -200,15 +197,22 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-02-12 15:14:30" itemprop="dateCreated datePublished" datetime="2018-02-12T15:14:30+08:00">2018-02-12</time>
+              <time title="创建时间：2017-11-12 09:12:03" itemprop="dateCreated datePublished" datetime="2017-11-12T09:12:03+08:00">2017-11-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2017-11-22 15:14:30" itemprop="dateModified" datetime="2017-11-22T15:14:30+08:00">2017-11-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">服务器操作</span></a>
+                  <a href="/categories/%E6%83%85%E6%84%9F%E4%BA%A4%E6%B5%81/" itemprop="url" rel="index"><span itemprop="name">情感交流</span></a>
                 </span>
             </span>
 
@@ -223,54 +227,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <ol>
-<li><p>简介<br>vsftpd 是“very secure FTP daemon”的缩写，安全性是它的一个最大的特点。<span id="more"></span>vsftpd 是一个 UNIX 类操作系统上运行的服务器的名字，它可以运行在诸如 Linux、BSD、Solaris、 HP-UNIX等系统上面，是一个完全免费的、开发源代码的ftp服务器软件，支持很多其他的FTP 服务器所不支持的特征。<br>—来自互动百科</p>
-</li>
-<li><p>背景<br>之所以想起来安装FTP服务器，是因为我的服务器主要是用作梯子。然后前一段时间利用她搭建了自己的博客，也就是你现在浏览的这个。但是每次想写博客时候。总要登录到远程服务器然后操作。对了，我的博客是用hexo搭建的。然后操作起来不是很方便，所以想着，在本地写好后直接放到服务器上去。于是就开始搭建。</p>
-</li>
-<li><p>安装步骤<br>系统环境<br> OS: Debian 8.7 jessie</p>
-</li>
-</ol>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>这里的安装步骤是参考简书上《Ubuntu 14.04 FTP服务器–vsftpd的安装和配置》（<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/2a8107b5c740%EF%BC%89">http://www.jianshu.com/p/2a8107b5c740）</a>.</p>
-<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>sudo apt-get update</p>
-<h3 id="安装vsftpd"><a href="#安装vsftpd" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h3><p>sudo apt-get install vsftpd<br>判断vsftpd是否安装成功<br>service vsftpd status<br>如果出现：<br><code>● vsftpd.service - vsftpd FTP server Loaded: loaded (/lib/systemd/system/vsftpd.service; enabled) Active: active (running) since Mon 2017-08-07 11:54:56 UTC; 43min ago Process: 27797 ExecStartPre=/bin/mkdir -p /var/run/vsftpd/empty (code=exited, status=0/SUCCESS) Main PID: 27800 (vsftpd) CGroup: /system.slice/vsftpd.service └─27800 /usr/sbin/vsftpd /etc/vsftpd.conf Aug 07 11:54:56 lbj systemd[1]: Started vsftpd FTP server.</code><br>表示安装成功。</p>
-<h3 id="服务器端基本命令"><a href="#服务器端基本命令" class="headerlink" title="服务器端基本命令"></a>服务器端基本命令</h3><p>service vsftpd stop &#x2F;&#x2F;关闭vsftpd服务 service vsftpd start &#x2F;&#x2F;启动vsftpd服务 service vsftpd restart &#x2F;&#x2F;重启vsftpd服务器</p>
-<p>新建”&#x2F;home&#x2F;share”目录作为用户主目录<br>sudo mkdir &#x2F;home&#x2F;share</p>
-<p>新建share用户作为FTP登录用户并设置密码<br>sudo useradd -d &#x2F;home&#x2F;share -s &#x2F;bin&#x2F;bash share sudo passwd share<br>使用vim修改配置文件&#x2F;etc&#x2F;vsftpd.conf<br>vsftpd默认配置是不支持上传文件的。我们需要手动打开,找到”write_enable”。把前面的”#“注释去掉保存就行了。至此简单的FTP服务器就搭建好了。<br>4. 测试</p>
-<h3 id="本地登录"><a href="#本地登录" class="headerlink" title="本地登录"></a>本地登录</h3><p>ftp 你的服务器ip.<br>如果顺利会看到<br>Connected to 你的服务器ip. 220 (vsFTPd 3.0.2) Name (你的服务器ip:x): share 331 Please specify the password. Password: 230 Login successful. Remote system type is UNIX. Using binary mode to transfer files.<br>其中会提示输入用户名和密码。<br>下面就可以使用FTP命令进行操作了。</p>
-<p>简单的FTP命令：<br>get remote-file[local-file]： 将远程主机的文件remote-file传至 本地硬盘的local-file。 mget remote-files：传输多个远程文件。 put local-file[remote-file]：将本地文件local-file传送至远程主机<br>我用的命令不多，就简单列举几条。详细命令看<a target="_blank" rel="noopener" href="http://www.jb51.net/os/RedHat/1133.html">http://www.jb51.net/os/RedHat/1133.html</a><br>5. 总结<br>第一次写这种技术性博客。可能逻辑上不是很缜密。希望大家提出意见了建议。同时通过这篇博客，我也加深对Linux命令和FTP命令的认识。后期有时间会更新。<br>ps：这篇博客就是通过FTP上传到我的服务器上的。</p>
-
+          <h2 id="观点"><a href="#观点" class="headerlink" title="观点"></a>观点</h2><p>我不想为了谈恋爱而谈恋爱。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/11/12/4beeae268314/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
     
     
     
-
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2018/01/12/001224dd03cd/" rel="prev" title="我要你葳蕤且长青">
-      <i class="fa fa-chevron-left"></i> 我要你葳蕤且长青
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2018/08/25/bb6148755930/" rel="next" title="V2RayN开启代理之后本地Host文件失效的问题解决方法">
-      V2RayN开启代理之后本地Host文件失效的问题解决方法 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
   
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 
 
@@ -322,7 +306,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">1.1.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85vsftpd"><span class="nav-number">1.2.</span> <span class="nav-text">安装vsftpd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">服务器端基本命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%99%BB%E5%BD%95"><span class="nav-number">1.4.</span> <span class="nav-text">本地登录</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
