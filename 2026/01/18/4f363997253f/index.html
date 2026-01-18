@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lbjxr.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言本指南涵盖了从安装 Rclone 到实现每日凌晨 3 点自动备份、自动清理 7 天前旧备份的全过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux挂载 Infini-Cloud 并实现 Docker 项目自动备份指南">
+<meta property="og:url" content="https://lbjxr.github.io/2026/01/18/4f363997253f/index.html">
+<meta property="og:site_name" content="LBJ_Blog">
+<meta property="og:description" content="前言本指南涵盖了从安装 Rclone 到实现每日凌晨 3 点自动备份、自动清理 7 天前旧备份的全过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-18T12:35:02.000Z">
+<meta property="article:modified_time" content="2026-01-18T12:35:02.000Z">
+<meta property="article:author" content="LiuBenJian">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lbjxr.github.io/2026/01/18/4f363997253f/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux挂载 Infini-Cloud 并实现 Docker 项目自动备份指南 | LBJ_Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKE3SF96M9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GKE3SF96M9');
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LBJ_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个计算机小白，努力让自己变得多彩</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="Home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="LBJ fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="Tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="Cates fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="Archives fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+    <div style="   float: right;">
+        <!-- 代码参考，需要自行调整height和scale数值 -->
+      <iframe frameborder=0 src="https://support.nodeget.com/page/promotion?id=228" style="border-radius:8px; height: 270px;
+              transform: scale(1.0); transform-origin: top left;"></iframe>
+      </div>
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lbjxr.github.io/2026/01/18/4f363997253f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/toux.webp">
+      <meta itemprop="name" content="LiuBenJian">
+      <meta itemprop="description" content="似懂非懂的小白">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LBJ_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux挂载 Infini-Cloud 并实现 Docker 项目自动备份指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-01-18 20:35:02" itemprop="dateCreated datePublished" datetime="2026-01-18T20:35:02+08:00">2026-01-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">服务器操作</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本指南涵盖了从安装 Rclone 到实现每日凌晨 3 点自动备份、自动清理 7 天前旧备份的全过程。</p>
+<span id="more"></span>
+
+<h2 id="一、-环境准备"><a href="#一、-环境准备" class="headerlink" title="一、 环境准备"></a>一、 环境准备</h2><ul>
+<li><strong>操作系统</strong>: Ubuntu 24.04.3 LTS</li>
+<li><strong>云盘服务</strong>: Infini-Cloud (支持 WebDAV)</li>
+<li><strong>工具</strong>: Rclone</li>
+</ul>
+<hr>
+<h2 id="二、-安装与配置-Rclone"><a href="#二、-安装与配置-Rclone" class="headerlink" title="二、 安装与配置 Rclone"></a>二、 安装与配置 Rclone</h2><h3 id="1-安装软件"><a href="#1-安装软件" class="headerlink" title="1. 安装软件"></a>1. 安装软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install rclone fuse3 -y</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>配置 WebDAV 连接<br>执行 rclone config，按照以下关键点输入：</li>
+</ol>
+<ul>
+<li>name: infini</li>
+<li>Storage: 选择 WebDAV</li>
+<li>url: <a target="_blank" rel="noopener" href="https://dav.teracloud.jp/dav/">https://dav.teracloud.jp/dav/</a></li>
+<li>vendor: Other</li>
+<li>user: 填写你的用户名</li>
+<li>pass: 选择加密输入，填写 App Password (在云盘后台生成)</li>
+</ul>
+<p>三、 (可选) 挂载云盘为本地磁盘<br>如果您只需要备份功能，此步可跳过。如果需要像本地硬盘一样查看文件，请执行此步。</p>
+<ol>
+<li>创建挂载点</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /mnt/infini</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>创建 Systemd 服务实现开机自启<br>创建文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/systemd/system/rclone-infini.service：</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><figcaption><span>TOML</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Rclone Mount InfiniCloud</span><br><span class="line">After=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/rclone mount infini: /mnt/infini \</span><br><span class="line"> --allow-other \</span><br><span class="line"> --allow-non-empty \</span><br><span class="line"> --vfs-cache-mode full \</span><br><span class="line"> --vfs-cache-max-size 10G</span><br><span class="line">ExecStop=/bin/fusermount -u /mnt/infini</span><br><span class="line">Restart=on-failure</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>启动服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> rclone-infini</span><br><span class="line"><span class="built_in">sudo</span> systemctl start rclone-infini</span><br></pre></td></tr></table></figure>
+<p>四、 自动化备份脚本<br>创建备份脚本 &#x2F;root&#x2F;docker_backup.sh。该脚本直接调用 Rclone API，不依赖挂载点，更稳定。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /root/docker_backup.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--- 配置区 ---</span></span><br><span class="line">REMOTE_NAME=&quot;infini&quot;              # rclone配置名</span><br><span class="line">REMOTE_DIR=&quot;Backup/Docker&quot;        # 云端目录</span><br><span class="line">DATE=$(date +&#x27;%Y-%m-%d_%H%M%S&#x27;)</span><br><span class="line">BACKUP_NAME=&quot;DockerBackup_$DATE.tar.gz&quot;</span><br><span class="line">LOG_FILE=&quot;/var/log/docker_backup.log&quot;</span><br><span class="line">TEMP_DIR=&quot;/tmp/docker_backup_work&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">需要备份的 Docker 项目目录</span></span><br><span class="line">DOCKER_DIRECTORIES=(</span><br><span class="line">    &quot;/opt/NginxProxyManager&quot;</span><br><span class="line">    &quot;/opt/telegram-to-mail&quot;</span><br><span class="line">    &quot;/opt/bark&quot;</span><br><span class="line">)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--- 逻辑区 ---</span></span><br><span class="line">mkdir -p &quot;$TEMP_DIR&quot;</span><br><span class="line">echo &quot;[$DATE] --- 备份任务开始 ---&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 打包压缩</span></span><br><span class="line">echo &quot;[$DATE] 正在打包项目...&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line">tar -czf &quot;$TEMP_DIR/$BACKUP_NAME&quot; &quot;$&#123;DOCKER_DIRECTORIES[@]&#125;&quot; 2&gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line"></span><br><span class="line">if [ $? -eq 0 ]; then</span><br><span class="line">    # 2. 上传云端</span><br><span class="line">    echo &quot;[$DATE] 上传中...&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line">    /usr/bin/rclone copy &quot;$TEMP_DIR/$BACKUP_NAME&quot; &quot;$REMOTE_NAME:$REMOTE_DIR&quot; &gt;&gt; &quot;$LOG_FILE&quot; 2&gt;&amp;1</span><br><span class="line">    </span><br><span class="line">    if [ $? -eq 0 ]; then</span><br><span class="line">        echo &quot;[$DATE] 上传成功！&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line">        </span><br><span class="line">        # 3. 清理云端 7 天前的备份</span><br><span class="line">        echo &quot;[$DATE] 清理 7 天前的旧备份...&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line">        /usr/bin/rclone delete &quot;$REMOTE_NAME:$REMOTE_DIR&quot; --min-age 7d &gt;&gt; &quot;$LOG_FILE&quot; 2&gt;&amp;1</span><br><span class="line">        </span><br><span class="line">        # 4. 清理本地临时文件</span><br><span class="line">        rm -f &quot;$TEMP_DIR/$BACKUP_NAME&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;[$DATE] 错误：上传失败！&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line">    fi</span><br><span class="line">else</span><br><span class="line">    echo &quot;[$DATE] 错误：打包失败！&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;[$DATE] --- 任务完成 ---&quot; &gt;&gt; &quot;$LOG_FILE&quot;</span><br></pre></td></tr></table></figure>
+
+<p>赋予执行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x /root/docker_backup.sh</span><br></pre></td></tr></table></figure>
+<p>五、 创建定时任务 (Cron)<br>实现每天凌晨 3:00 自动执行：</p>
+<p>打开 crontab 编辑器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> crontab -e</span><br></pre></td></tr></table></figure>
+<p>在文件底部添加：</p>
+<p>代码段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 3 * * * /bin/bash /root/docker_backup.sh &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>六、 常用维护命令</p>
+<ul>
+<li><p>查看备份日志: tail -f &#x2F;var&#x2F;log&#x2F;docker_backup.log</p>
+</li>
+<li><p>查看挂载状态: df -h | grep infini</p>
+</li>
+<li><p>手动立即备份: sudo &#x2F;root&#x2F;docker_backup.sh</p>
+</li>
+<li><p>查看云盘文件列表: rclone ls infini:Backup&#x2F;Docker</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/10/25/85da75e61ea6/" rel="prev" title="如何在Windows上面配置git链接GitHub">
+      <i class="fa fa-chevron-left"></i> 如何在Windows上面配置git链接GitHub
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">一、 环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE-Rclone"><span class="nav-number">3.</span> <span class="nav-text">二、 安装与配置 Rclone</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">1. 安装软件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiuBenJian"
+      src="/uploads/toux.webp">
+  <p class="site-author-name" itemprop="name">LiuBenJian</p>
+  <div class="site-description" itemprop="description">似懂非懂的小白</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lbjxr" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lbjxr" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuBenJian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
